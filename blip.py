@@ -15,17 +15,12 @@ def raw_number(λ):
 
 
 def calc(λ, args, funs):
-    # print(λ, args)
     if λ[0] in ALPHA:
         return args[ALPHA.index(λ[0])], 1
     elif λ[0] == '+':
         a, α = calc(λ[1:], args, funs)
         b, β = calc(λ[(1+α):], args, funs)
         return a+b, α+β+1
-    elif λ[0] == '*':
-        a, α = calc(λ[1:], args, funs)
-        b, β = calc(λ[(1+α):], args, funs)
-        return a*b, α+β+1
     elif λ[0] == '_':
         a, α = calc(λ[1:], args, funs)
         return -a, α+1
@@ -50,8 +45,9 @@ def calc(λ, args, funs):
         b, β = calc(λ[(1+α):], args, funs)
 
         z = b
+        ζ = calc(λ[(1+α+β):], args+[b,1], funs)[1]
         for i in range(1,a+1):
-            z, ζ = calc(λ[(1+α+β):], args+[z,i], funs)
+            z = calc(λ[(1+α+β):], args+[z,i], funs)[0]
         
         return z, α+β+ζ+1
     elif λ[0] == 'i':
@@ -75,7 +71,6 @@ def calc(λ, args, funs):
         fun_args = []
         size = 1
         for i in range(n):
-            print(i,n)
             z, ζ = calc(λ[size:], args, funs)
             fun_args.append(z)
             size += ζ
@@ -89,7 +84,6 @@ def run(blip):
     for λ in blip[:-1]:
         i, n = 1, 0
         while i < len(λ):
-            # print(λ[i:])
             if λ[i] == 't' and i != len(λ)-1 and λ[i+1] in DEC:
                 z,ζ = raw_number(λ[i+1:])
                 i += z+ζ-1
@@ -100,7 +94,6 @@ def run(blip):
     
     i, n = 0, 0
     while i < len(blip[-1]):
-        # print(blip[-1][i:])
         if blip[-1][i] == 't' and i != len(blip[-1])-1 and blip[-1][i+1] in DEC:
             z,ζ = raw_number(blip[-1][i+1:])
             i += z+ζ-1
