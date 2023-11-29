@@ -16,7 +16,6 @@ def raw_number(λ):
 
 def calc(λ, args, funs, σ, size = False):
     σ += 1
-    print(σ)
     if λ[0] in ALPHA:
         return args[ALPHA.index(λ[0])], 1
     elif λ[0] == '+':
@@ -71,7 +70,7 @@ def calc(λ, args, funs, σ, size = False):
             return str(a), α+1
 
     elif λ[0] in funs.keys():
-        if σ == 900:
+        if σ > 900:
             print("┌──────────────────────────────┐")
             print("│ Python recursion depth limit │")
             print("└──────────────────────────────┘")
@@ -118,10 +117,11 @@ def run(blip):
     args = []
     for i in range(n):
         args.append(int(input()))
+    print(' -dict-', funs)
     return calc(blip[-1], args, funs, 0)[0]
 
 
 if argv[1] == "exe":
-    print(run(open(argv[2], 'r').readlines()))
+    print(run(open(argv[2], 'r', encoding="utf-8").readlines()))
 elif argv[1] == "run":
     print(run(argv[2]))
