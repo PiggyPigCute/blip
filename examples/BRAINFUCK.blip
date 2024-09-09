@@ -1,0 +1,16 @@
+: Debug
+tτAA
+tδBA
+
+:Entrée du code
+:le code "β:0" demande le prgm Brainfuck et le renvoit
+iβ?=Bn0Aβ+A:1B
+
+:Code
+b:3n4n5n6
+
+:Print le code
+π+++++?=An1t1>t0?=An2t1<t0?=An3t1[t0?=An4t1]t0?=An5t1.t0?=An6t1,t0
+Π;_At0+.π:Ai
+
+;n2t0+.π:bi
